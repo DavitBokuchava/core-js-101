@@ -70,8 +70,8 @@ function getStringFromTemplate(firstName, lastName) {
  */
 function extractNameFromTemplate(value) {
   // throw new Error('Not implemented');
-  let x = `${value.split(' ').filter((a) => a !== 'Hello,').join(' ')}`
-    return x.substr(0,x.length-1);
+  const x = `${value.split(' ').filter((a) => a !== 'Hello,').join(' ')}`;
+  return x.substr(0, x.length - 1);
 }
 
 
