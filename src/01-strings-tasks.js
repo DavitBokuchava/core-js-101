@@ -20,7 +20,7 @@
  */
 function concatenateStrings(value1, value2) {
   // throw new Error('Not implemented');
-  return value1 + value2;
+  return `${value1}${value2}`;
 }
 
 
@@ -70,7 +70,8 @@ function getStringFromTemplate(firstName, lastName) {
  */
 function extractNameFromTemplate(value) {
   // throw new Error('Not implemented');
-  return `${value.split(' ').filter((a) => a !== 'Hello,').join(' ').substr(0, -1)}`;
+  let x = `${value.split(' ').filter((a) => a !== 'Hello,').join(' ')}`
+    return x.substr(0,x.length-1);
 }
 
 
