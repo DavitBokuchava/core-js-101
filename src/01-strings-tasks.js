@@ -117,8 +117,9 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'A', 5  => 'AAAAA'
  *   'cat', 3 => 'catcatcat'
  */
-function repeatString(/* value, count */) {
-  throw new Error('Not implemented');
+function repeatString(value, count) {
+  // throw new Error('Not implemented');
+  return value.repeat(count);
 }
 
 /**
@@ -213,16 +214,21 @@ function extractEmails(/* str */) {
  *             '└──────────┘\n'
  *
  */
-// const obj = {
-//   topLeft: '┌',
-//   topRight: '┐',
-//   bottomLeft: '└',
-//   bottomRight: '┘',
-//   dash: '-',
-//   verticalLine: '|'
-// }
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+const lines = {
+  topLeft: '┌',
+  topRight: '┐',
+  bottomLeft: '└',
+  bottomRight: '┘',
+  dash: '─',
+  verticalLine: '│',
+  middle: ' ',
+};
+function getRectangleString(width, height) {
+  // throw new Error('Not implemented');
+  const top = `${lines.topLeft}${lines.dash.repeat(width - 2)}${lines.topRight}\n`;
+  const middle = `${lines.verticalLine}${lines.middle.repeat(width - 2)}${lines.verticalLine}\n`;
+  const bottom = `${lines.bottomLeft}${lines.dash.repeat(width - 2)}${lines.bottomRight}\n`;
+  return `${top}${middle.repeat(height - 2)}${bottom}`;
 }
 
 
@@ -242,8 +248,10 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  // throw new Error('Not implemented');
+  const letters = 'abcdefghijklmnopqrstuvwxyzabcdefghijklmABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLM';
+  return str.replace(/[a-z]/gi, (ltr) => letters[letters.indexOf(ltr) + 13]);
 }
 
 /**
