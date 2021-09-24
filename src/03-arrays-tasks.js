@@ -153,8 +153,9 @@ function getStringsLength(arr) {
  *    [ 1, 3, 4, 5 ], 2, 1  => [ 1, 2, 3, 4, 5 ]
  *    [ 1, 'b', 'c'], 0, 'x'  => [ 'x', 1, 'b', 'c' ]
  */
-function insertItem(/* arr, item, index */) {
-  throw new Error('Not implemented');
+function insertItem(arr, item, index) {
+  // throw new Error('Not implemented');
+  return arr.splice(index, 0, item);
 }
 // const arr1 = arr;
 // arr1[index] = item;
@@ -283,9 +284,11 @@ function getSecondItems(arr) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
-  // return arr.map((el, i) => new Array.fill(arr[i]).map(() => el)).flat()
+function propagateItemsByPositionIndex(arr) {
+  // throw new Error('Not implemented');
+  const arr1 = [];
+  arr.map((el, i) => arr1.push(...new Array(i + 1).fill(el)));
+  return arr1;
 }
 
 
@@ -321,9 +324,12 @@ function get3TopItems(arr) {
  *   [ null, 1, 'elephant' ] => 1
  *   [ 1, '2' ] => 1
  */
-function getPositivesCount(/* arr */) {
-  throw new Error('Not implemented');
-  // return arr.filter((el) => Number.isInteger(el) && el > 0).sort((a, b) => b - a)[0];
+function getPositivesCount(arr) {
+  // throw new Error('Not implemented');
+  if (arr.length === 0) {
+    return 0;
+  }
+  return arr.filter((el) => Number.isInteger(el) && el > 0).sort((a, b) => b - a)[0];
 }
 
 /**
