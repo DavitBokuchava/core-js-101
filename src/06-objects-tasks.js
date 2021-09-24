@@ -25,10 +25,11 @@ function Rectangle(width, height) {
   this.width = width;
   this.height = height;
 }
-Rectangle.prototype.getArea = function () {
+Rectangle.prototype.getArea = function getArea() {
   return this.width * this.height;
 };
 
+// Object.setPrototypeOf(getArea, Rectangle);
 
 /**
  * Returns the JSON representation of specified object
