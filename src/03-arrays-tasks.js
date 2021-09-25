@@ -459,10 +459,14 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
+// function srt(ct, cntr, arr) {
+//   const cities = arr.sort((a, b) => (a[ct] === b[ct] ? 0 : a[ct] > b[ct] ? 1 : -1));
+//   return cities.sort((a, b) => (a[cntr] === b[cntr] ? 0 : a[cntr] > b[cntr] ? 1 : -1));
+// }
 function sortCitiesArray(/* arr */) {
   throw new Error('Not implemented');
+  // return srt('city', 'country', arr);
 }
-
 /**
  * Creates an indentity matrix of the specified size
  *
