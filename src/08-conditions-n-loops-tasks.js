@@ -319,6 +319,7 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
+
 function isBracketsBalanced(/* str */) {
   throw new Error('Not implemented');
 }
@@ -385,8 +386,10 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const multy = (a, b) => a.map((x, i) => a[i] * b[i]).reduce((m, n) => m + n);
+  const transpose = (a) => a[0].map((x, i) => a.map((y) => y[i]));
+  return m1.map((x) => (transpose(m2).map((y) => multy(x, y))));
 }
 
 
