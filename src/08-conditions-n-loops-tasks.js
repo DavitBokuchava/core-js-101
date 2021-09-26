@@ -94,8 +94,15 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  // throw new Error('Not implemented');
+  if (a <= 0 || b <= 0 || c <= 0) {
+    return false;
+  }
+  if (a + b > c && a + c > b && c + b > a) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -205,8 +212,11 @@ function findFirstSingleChar(/* str */) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  // throw new Error('Not implemented');
+  const aa = a > b ? b : a;
+  const bb = a <= b ? b : a;
+  return `${isStartIncluded ? '[' : '('}${aa}, ${bb}${isEndIncluded ? ']' : ')'}`;
 }
 
 
@@ -268,6 +278,20 @@ function reverseInteger(num) {
  */
 function isCreditCardNumber(/* ccn */) {
   throw new Error('Not implemented');
+  // let numSum = 0;
+  // let value;
+  // ccn.map((a, i) => {
+  //   if (i % 2 === 0) {
+  //     value = 2 * a;
+  //     if (value >= 10) {
+  //       value = (Math.floor(value / 10) + value % 10);
+  //     }
+  //   } else {
+  //     value = +a;
+  //   }
+  //   numSum += value;
+  // })
+  // return (numSum % 10 === 0);
 }
 
 /**
@@ -319,9 +343,23 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-
+// const openParenthes = ['{', '[', '(', '<', '{', '['];
+// const closeParenthes = [']', '}', '>', ')', ']', '}'];
 function isBracketsBalanced(/* str */) {
   throw new Error('Not implemented');
+  // const brackets = '[]{}()<>';
+  // const stack = [];
+  // for (const bracket of str) {
+  //   const bracketsIndex = brackets.indexOf(bracket);
+  //   if (bracketsIndex % 2 === 0) {
+  //     stack.push(bracketsIndex + 1);
+  //   } else {
+  //     if (stack.pop() !== bracketsIndex) {
+  //       return false;
+  //     }
+  //   }
+  // }
+  // return stack.length === 0;
 }
 
 
