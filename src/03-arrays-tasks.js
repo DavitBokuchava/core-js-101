@@ -249,8 +249,16 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  // throw new Error('Not implemented');
+  let sm = 0;
+  let prvSm = 0;
+  const arr1 = arr.map((element) => {
+    sm = prvSm;
+    prvSm += element;
+    return element + sm;
+  });
+  return arr1;
 }
 
 /**
@@ -632,10 +640,20 @@ function getElementByIndexes(arr, indexes) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  // throw new Error('Not implemented');
+  if (arr.length === 1) return arr;
+  if (arr.length === 2 || arr.length === 3) return arr.reverse();
+  const halfLen = Math.floor(arr.length / 2);
+  const firstHalf = arr.slice(0, halfLen);
+  if (arr.length % 2 === 0) {
+    const secondHalf = arr.slice(halfLen);
+    return [...secondHalf, ...firstHalf];
+  }
+  const secondHalf = arr.slice(halfLen + 1);
+  return [...secondHalf, arr[halfLen], ...firstHalf];
 }
-
+// TT
 
 module.exports = {
   findElement,
