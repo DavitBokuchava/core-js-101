@@ -206,8 +206,13 @@ function partialUsingArguments(fn, ...args1) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(/* startFrom */) {
-  throw new Error('Not implemented');
+function getIdGeneratorFunction(startFrom) {
+  // throw new Error('Not implemented');
+  // eslint-disable-next-line no-param-reassign,arrow-body-style,no-plusplus
+  return () => {
+    // eslint-disable-next-line no-param-reassign,arrow-body-style,no-plusplus
+    return startFrom++;
+  };
 }
 
 
