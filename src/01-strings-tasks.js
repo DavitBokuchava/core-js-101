@@ -186,9 +186,15 @@ function convertToUpperCase(str) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
-  // return str.split(';').map((el) => el.split('.'))
+function extractEmails(str) {
+  // throw new Error('Not implemented');
+  // eslint-disable-next-line no-param-reassign,arrow-body-style,no-plusplus
+  return str.split(';').map((el) => {
+    // eslint-disable-next-line no-param-reassign,arrow-body-style,no-plusplus,arrow-body-style
+    return el.split('.').map((a, i) => {
+      return i === el.length - 2 ? `@${a[el.length - 2]}` : a;
+    }).join('.');
+  });
 }
 
 /**
