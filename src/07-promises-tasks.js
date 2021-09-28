@@ -105,7 +105,7 @@ function getFastestPromise(array) {
  */
 function chainPromises(array, action) {
   const result = [];
-  const promise = new Promise((res) => {
+  return new Promise((res) => {
     array.forEach((item) => {
       item.then((res1) => {
         result.push(res1);
@@ -116,8 +116,6 @@ function chainPromises(array, action) {
       });
     });
   });
-
-  return promise;
 }
 
 module.exports = {
