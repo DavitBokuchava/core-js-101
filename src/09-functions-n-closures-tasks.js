@@ -126,7 +126,8 @@ function memoize(func) {
 // }
 function retry(func, attempts) {
   return () => {
-    for (let i = 0; i < attempts; i += 1) {
+    // eslint-disable-next-line no-param-reassign,no-plusplus
+    for (let i = 0; i < attempts; i++) {
       try {
         return func();
       } catch (error) {
