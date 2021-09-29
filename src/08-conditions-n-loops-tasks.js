@@ -479,6 +479,40 @@ function getMatrixProduct(m1, m2) {
  */
 function evaluateTicTacToePosition(/* position */) {
   throw new Error('Not implemented');
+  // const obj = {}
+  // let horisX = 0;
+  // let diagLeftX = 0;
+  // let diagRightX = 0;
+  // let vertX = 0;
+  // let horisO = 0;
+  // let diagLeftO = 0;
+  // let diagRightO = 0;
+  // let vertO = 0;
+  // const len = position.length;
+  // // eslint-disable-next-line no-param-reassign,arrow-body-style,no-plusplus
+  // for (let i = 0; i < len; i++) {
+  //   // eslint-disable-next-line no-param-reassign,arrow-body-style,no-plusplus,
+  //   for (let j = 0; j < len; j++) {
+  //     if (!obj[`${i}${j}`]) obj[`${i}${j}`] = `${i}${j}`;
+  //     if (obj[`${i}${j}`]&&position[i][j] === 'X') horisX += 1;
+  //     if (obj[`${i}${j}`]&&position[i][j] === '0') horisO += 1;
+  //     if (horisX === 3) return 'X';
+  //     if (horisO === 3) return '0';
+  //     if (obj[`${i}${j}`]&&position[j][i] === 'X') vertX += 1;
+  //     if (obj[`${i}${j}`]&&position[j][i] === '0') vertO += 1;
+  //     if (vertX === 3) return 'X';
+  //     if (vertO === 3) return '0';
+  //     if (obj[`${i}${j}`]&&position[i][i] === 'X') diagRightX += 1;
+  //     if (obj[`${i}${j}`]&&position[i][i] === '0') diagRightO += 1;
+  //     if (diagRightX === 3) return 'X';
+  //     if (diagRightO === 3) return '0';
+  //     if (obj[`${i}${j}`]&&position[i][len - i - 1] === 'X') diagLeftX += 1;
+  //     if (position[i][len - i - 1] === '0') diagLeftO += 1;
+  //     if (diagLeftX === 3) return 'X';
+  //     if (diagLeftO === 3) return '0';
+  //   }
+  // }
+  // return undefined;
 }
 
 
