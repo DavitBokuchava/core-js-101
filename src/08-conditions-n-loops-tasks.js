@@ -289,266 +289,265 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(ccn) {
-  // throw new Error('Not implemented');
-  const sumOfDigits = (x) => {
-    let k;
-    if (typeof x === 'number') k = x.toString().split('');
-    else k = x;
-    if (k.length === 1) return x;
-    return k.reduce((a, b) => Number.parseFloat(a) + Number.parseFloat(b));
-  };
-
-  const l = ccn.toString().length;
-
-  let digit;
-  let sum = 0;
-
-  let count = 0;
-
-  for (let i = l - 2; i >= 0; i -= 1) {
-    digit = Number.parseFloat(ccn.toString()[i]);
-
-    if (count === 0) {
-      sum += sumOfDigits(digit * 2);
-      count += 1;
-    } else {
-      sum += sumOfDigits(digit);
-      count = 0;
-    }
-  }
-
-  const realLastDigit = (10 - (sum % 10)).toString();
-
-  return realLastDigit[realLastDigit.length - 1] === ccn.toString()[l - 1];
-
-}
-
-/**
- * Returns the digital root of integer:
- *   step1 : find sum of all digits
- *   step2 : if sum > 9 then goto step1 otherwise return the sum
- *
- * @param {number} n
- * @return {number}
- *
- * @example:
- *   12345 ( 1+2+3+4+5 = 15, 1+5 = 6) => 6
- *   23456 ( 2+3+4+5+6 = 20, 2+0 = 2) => 2
- *   10000 ( 1+0+0+0+0 = 1 ) => 1
- *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
- */
-function getDigitalRoot(num) {
-  // throw new Error('Not implemented');
-  let sum = num;
-  let arr = [];
-  const reducer = (a, b) => parseInt(a, 10) + parseInt(b, 10);
-
-  while (sum > 9) {
-    arr = sum.toString().split('');
-    sum = arr.reduce(reducer);
-  }
-  return sum;
-}
-
-
-/**
- * Returns true if the specified string has the balanced brackets and false otherwise.
- * Balanced means that is, whether it consists entirely of pairs of opening/closing brackets
- * (in that order), none of which mis-nest.
- * Brackets include [],(),{},<>
- *
- * @param {string} str
- * @return {boolean}
- *
- * @example:
- *   '' => true
- *   '[]'  => true
- *   '{}'  => true
- *   '()   => true
- *   '[[]' => false
- *   ']['  => false
- *   '[[][][[]]]' => true
- *   '[[][]][' => false
- *   '{)' = false
- *   '{[(<{[]}>)]}' = true
- */
-// const openParenthes = ['{', '[', '(', '<', '{', '['];
-// const closeParenthes = [']', '}', '>', ')', ']', '}'];
-function isBracketsBalanced(str) {
-  const brackets = ['[]', '()', '{}', '<>'];
-  let balanced = str;
-  const len = brackets.length;
-  for (let i = 0; i < len; i += 1) {
-    while (balanced) {
-      if (balanced.includes(brackets[i])) {
-        balanced = balanced.replace(brackets[i], '');
-        i = 0;
-      } else break;
-    }
-  }
-  return balanced.length === 0;
-}
-
-
-/**
- * Returns the string with n-ary (binary, ternary, etc, where n <= 10)
- * representation of specified number.
- * See more about
- * https://en.wikipedia.org/wiki/Binary_number
- * https://en.wikipedia.org/wiki/Ternary_numeral_system
- * https://en.wikipedia.org/wiki/Radix
- *
- * @param {number} num
- * @param {number} n, radix of the result
- * @return {string}
- *
- * @example:
- *   1024, 2  => '10000000000'
- *   6561, 3  => '100000000'
- *    365, 2  => '101101101'
- *    365, 3  => '111112'
- *    365, 4  => '11231'
- *    365, 10 => '365'
- */
-function toNaryString(num, n) {
-  // throw new Error('Not implemented');
-  return num.toString(n);
-}
-
-
-/**
- * Returns the commom directory path for specified array of full filenames.
- *
- * @param {array} pathes
- * @return {string}
- *
- * @example:
- *   ['/web/images/image1.png', '/web/images/image2.png']  => '/web/images/'
- *   ['/web/assets/style.css', '/web/scripts/app.js',  'home/setting.conf'] => ''
- *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
- *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
- */
-function getCommonDirectoryPath(pathes) {
-  // throw new Error('Not implemented');
-  const arrItems = pathes.map((item) => item.split('/'));
-  const sames = arrItems[0].map((_, i) => arrItems.map((item) => item[i]));
-  const geners = sames.filter((item1) => item1.every((item2) => item2 === item1[0]));
-  return [...geners, ['']].map((item) => item[0]).join('/');
-  // return commonPath;
-}
-
-
-/**
- * Returns the product of two specified matrixes.
- * See details: https://en.wikipedia.org/wiki/Matrix_multiplication
- *
- * @param {array} m1
- * @param {array} m2
- * @return {array}
- *
- * @example:
- *   [[ 1, 0, 0 ],       [[ 1, 2, 3 ],           [[ 1, 2, 3 ],
- *    [ 0, 1, 0 ],   X    [ 4, 5, 6 ],     =>     [ 4, 5, 6 ],
- *    [ 0, 0, 1 ]]        [ 7, 8, 9 ]]            [ 7, 8, 9 ]]
- *
- *                        [[ 4 ],
- *   [[ 1, 2, 3]]    X     [ 5 ],          =>     [[ 32 ]]
- *                         [ 6 ]]
- *
- */
-function getMatrixProduct(m1, m2) {
-  const multy = (a, b) => a.map((x, i) => a[i] * b[i]).reduce((m, n) => m + n);
-  const transpose = (a) => a[0].map((x, i) => a.map((y) => y[i]));
-  return m1.map((x) => (transpose(m2).map((y) => multy(x, y))));
-}
-
-
-/**
- * Returns the evaluation of the specified tic-tac-toe position.
- * See the details: https://en.wikipedia.org/wiki/Tic-tac-toe
- *
- * Position is provides as 3x3 array with the following values: 'X','0', undefined
- * Function should return who is winner in the current position according to the game rules.
- * The result can be: 'X','0',undefined
- *
- * @param {array} position
- * @return {string}
- *
- * @example
- *
- *   [[ 'X',   ,'0' ],
- *    [    ,'X','0' ],       =>  'X'
- *    [    ,   ,'X' ]]
- *
- *   [[ '0','0','0' ],
- *    [    ,'X',    ],       =>  '0'
- *    [ 'X',   ,'X' ]]
- *
- *   [[ '0','X','0' ],
- *    [    ,'X',    ],       =>  undefined
- *    [ 'X','0','X' ]]
- *
- *   [[    ,   ,    ],
- *    [    ,   ,    ],       =>  undefined
- *    [    ,   ,    ]]
- *
- */
-function evaluateTicTacToePosition(/* position */) {
+function isCreditCardNumber(/* ccn */) {
   throw new Error('Not implemented');
-  // let horisX = 0;
-  // let diagLeftX = 0;
-  // let diagRightX = 0;
-  // let vertX = 0;
-  // let horisO = 0;
-  // let diagLeftO = 0;
-  // let diagRightO = 0;
-  // let vertO = 0;
-  // const len = position.length;
-  // // eslint-disable-next-line no-param-reassign,arrow-body-style,no-plusplus
-  // for (let i = 0; i < len; i++) {
-  //   // eslint-disable-next-line no-param-reassign,arrow-body-style,no-plusplus,
-  //   for (let j = 0; j < len; j++) {
-  //     if (position[i][j] === 'X') horisX += 1;
-  //     if (position[i][j] === '0') horisO += 1;
-  //     if (horisX === 3) return 'X';
-  //     if (horisO === 3) return '0';
-  //     if (position[j][i] === 'X') vertX += 1;
-  //     if (position[j][i] === '0') vertO += 1;
-  //     if (vertX === 3) return 'X';
-  //     if (vertO === 3) return '0';
-  //     if (position[i][i] === 'X') diagRightX += 1;
-  //     if (position[i][i] === '0') diagRightO += 1;
-  //     if (diagRightX === 3) return 'X';
-  //     if (diagRightO === 3) return '0';
-  //     if (position[i][len - i - 1] === 'X') diagLeftX += 1;
-  //     if (position[i][len - i - 1] === '0') diagLeftO += 1;
-  //     if (diagLeftX === 3) return 'X';
-  //     if (diagLeftO === 3) return '0';
-  //     // if (diagLeftX === 3 || horisX === 3 || vertX === 3 || diagRightX === 3) return 'X';
-  //     // if (diagLeftO === 3 || horisO === 3 || vertO === 3 || diagRightO === 3) return '0';
+  //   const sumOfDigits = (x) => {
+  //     let k;
+  //     if (typeof x === 'number') k = x.toString().split('');
+  //     else k = x;
+  //     if (k.length === 1) return x;
+  //     return k.reduce((a, b) => Number.parseFloat(a) + Number.parseFloat(b));
+  //   };
+
+  //   const l = ccn.toString().length;
+
+  //   let digit;
+  //   let sum = 0;
+
+  //   let count = 0;
+
+  //   for (let i = l - 2; i >= 0; i -= 1) {
+  //     digit = Number.parseFloat(ccn.toString()[i]);
+
+  //     if (count === 0) {
+  //       sum += sumOfDigits(digit * 2);
+  //       count += 1;
+  //     } else {
+  //       sum += sumOfDigits(digit);
+  //       count = 0;
+  //     }
   //   }
+
+  //   const realLastDigit = (10 - (sum % 10)).toString();
+
+  //   return realLastDigit[realLastDigit.length - 1] === ccn.toString()[l - 1];
   // }
-  // return undefined;
-}
+
+  /**
+   * Returns the digital root of integer:
+   *   step1 : find sum of all digits
+   *   step2 : if sum > 9 then goto step1 otherwise return the sum
+   *
+   * @param {number} n
+   * @return {number}
+   *
+   * @example:
+   *   12345 ( 1+2+3+4+5 = 15, 1+5 = 6) => 6
+   *   23456 ( 2+3+4+5+6 = 20, 2+0 = 2) => 2
+   *   10000 ( 1+0+0+0+0 = 1 ) => 1
+   *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
+   */
+  function getDigitalRoot(num) {
+    // throw new Error('Not implemented');
+    let sum = num;
+    let arr = [];
+    const reducer = (a, b) => parseInt(a, 10) + parseInt(b, 10);
+
+    while (sum > 9) {
+      arr = sum.toString().split('');
+      sum = arr.reduce(reducer);
+    }
+    return sum;
+  }
 
 
-module.exports = {
-  getFizzBuzz,
-  getFactorial,
-  getSumBetweenNumbers,
-  isTriangle,
-  doRectanglesOverlap,
-  isInsideCircle,
-  findFirstSingleChar,
-  getIntervalString,
-  reverseString,
-  reverseInteger,
-  isCreditCardNumber,
-  getDigitalRoot,
-  isBracketsBalanced,
-  toNaryString,
-  getCommonDirectoryPath,
-  getMatrixProduct,
-  evaluateTicTacToePosition,
-};
+  /**
+   * Returns true if the specified string has the balanced brackets and false otherwise.
+   * Balanced means that is, whether it consists entirely of pairs of opening/closing brackets
+   * (in that order), none of which mis-nest.
+   * Brackets include [],(),{},<>
+   *
+   * @param {string} str
+   * @return {boolean}
+   *
+   * @example:
+   *   '' => true
+   *   '[]'  => true
+   *   '{}'  => true
+   *   '()   => true
+   *   '[[]' => false
+   *   ']['  => false
+   *   '[[][][[]]]' => true
+   *   '[[][]][' => false
+   *   '{)' = false
+   *   '{[(<{[]}>)]}' = true
+   */
+  // const openParenthes = ['{', '[', '(', '<', '{', '['];
+  // const closeParenthes = [']', '}', '>', ')', ']', '}'];
+  function isBracketsBalanced(str) {
+    const brackets = ['[]', '()', '{}', '<>'];
+    let balanced = str;
+    const len = brackets.length;
+    for (let i = 0; i < len; i += 1) {
+      while (balanced) {
+        if (balanced.includes(brackets[i])) {
+          balanced = balanced.replace(brackets[i], '');
+          i = 0;
+        } else break;
+      }
+    }
+    return balanced.length === 0;
+  }
+
+
+  /**
+   * Returns the string with n-ary (binary, ternary, etc, where n <= 10)
+   * representation of specified number.
+   * See more about
+   * https://en.wikipedia.org/wiki/Binary_number
+   * https://en.wikipedia.org/wiki/Ternary_numeral_system
+   * https://en.wikipedia.org/wiki/Radix
+   *
+   * @param {number} num
+   * @param {number} n, radix of the result
+   * @return {string}
+   *
+   * @example:
+   *   1024, 2  => '10000000000'
+   *   6561, 3  => '100000000'
+   *    365, 2  => '101101101'
+   *    365, 3  => '111112'
+   *    365, 4  => '11231'
+   *    365, 10 => '365'
+   */
+  function toNaryString(num, n) {
+    // throw new Error('Not implemented');
+    return num.toString(n);
+  }
+
+
+  /**
+   * Returns the commom directory path for specified array of full filenames.
+   *
+   * @param {array} pathes
+   * @return {string}
+   *
+   * @example:
+   *   ['/web/images/image1.png', '/web/images/image2.png']  => '/web/images/'
+   *   ['/web/assets/style.css', '/web/scripts/app.js',  'home/setting.conf'] => ''
+   *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
+   *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
+   */
+  function getCommonDirectoryPath(pathes) {
+    // throw new Error('Not implemented');
+    const arrItems = pathes.map((item) => item.split('/'));
+    const sames = arrItems[0].map((_, i) => arrItems.map((item) => item[i]));
+    const geners = sames.filter((item1) => item1.every((item2) => item2 === item1[0]));
+    return [...geners, ['']].map((item) => item[0]).join('/');
+    // return commonPath;
+  }
+
+
+  /**
+   * Returns the product of two specified matrixes.
+   * See details: https://en.wikipedia.org/wiki/Matrix_multiplication
+   *
+   * @param {array} m1
+   * @param {array} m2
+   * @return {array}
+   *
+   * @example:
+   *   [[ 1, 0, 0 ],       [[ 1, 2, 3 ],           [[ 1, 2, 3 ],
+   *    [ 0, 1, 0 ],   X    [ 4, 5, 6 ],     =>     [ 4, 5, 6 ],
+   *    [ 0, 0, 1 ]]        [ 7, 8, 9 ]]            [ 7, 8, 9 ]]
+   *
+   *                        [[ 4 ],
+   *   [[ 1, 2, 3]]    X     [ 5 ],          =>     [[ 32 ]]
+   *                         [ 6 ]]
+   *
+   */
+  function getMatrixProduct(m1, m2) {
+    const multy = (a, b) => a.map((x, i) => a[i] * b[i]).reduce((m, n) => m + n);
+    const transpose = (a) => a[0].map((x, i) => a.map((y) => y[i]));
+    return m1.map((x) => (transpose(m2).map((y) => multy(x, y))));
+  }
+
+
+  /**
+   * Returns the evaluation of the specified tic-tac-toe position.
+   * See the details: https://en.wikipedia.org/wiki/Tic-tac-toe
+   *
+   * Position is provides as 3x3 array with the following values: 'X','0', undefined
+   * Function should return who is winner in the current position according to the game rules.
+   * The result can be: 'X','0',undefined
+   *
+   * @param {array} position
+   * @return {string}
+   *
+   * @example
+   *
+   *   [[ 'X',   ,'0' ],
+   *    [    ,'X','0' ],       =>  'X'
+   *    [    ,   ,'X' ]]
+   *
+   *   [[ '0','0','0' ],
+   *    [    ,'X',    ],       =>  '0'
+   *    [ 'X',   ,'X' ]]
+   *
+   *   [[ '0','X','0' ],
+   *    [    ,'X',    ],       =>  undefined
+   *    [ 'X','0','X' ]]
+   *
+   *   [[    ,   ,    ],
+   *    [    ,   ,    ],       =>  undefined
+   *    [    ,   ,    ]]
+   *
+   */
+  function evaluateTicTacToePosition(/* position */) {
+    throw new Error('Not implemented');
+    // let horisX = 0;
+    // let diagLeftX = 0;
+    // let diagRightX = 0;
+    // let vertX = 0;
+    // let horisO = 0;
+    // let diagLeftO = 0;
+    // let diagRightO = 0;
+    // let vertO = 0;
+    // const len = position.length;
+    // // eslint-disable-next-line no-param-reassign,arrow-body-style,no-plusplus
+    // for (let i = 0; i < len; i++) {
+    //   // eslint-disable-next-line no-param-reassign,arrow-body-style,no-plusplus,
+    //   for (let j = 0; j < len; j++) {
+    //     if (position[i][j] === 'X') horisX += 1;
+    //     if (position[i][j] === '0') horisO += 1;
+    //     if (horisX === 3) return 'X';
+    //     if (horisO === 3) return '0';
+    //     if (position[j][i] === 'X') vertX += 1;
+    //     if (position[j][i] === '0') vertO += 1;
+    //     if (vertX === 3) return 'X';
+    //     if (vertO === 3) return '0';
+    //     if (position[i][i] === 'X') diagRightX += 1;
+    //     if (position[i][i] === '0') diagRightO += 1;
+    //     if (diagRightX === 3) return 'X';
+    //     if (diagRightO === 3) return '0';
+    //     if (position[i][len - i - 1] === 'X') diagLeftX += 1;
+    //     if (position[i][len - i - 1] === '0') diagLeftO += 1;
+    //     if (diagLeftX === 3) return 'X';
+    //     if (diagLeftO === 3) return '0';
+    //     // if (diagLeftX === 3 || horisX === 3 || vertX === 3 || diagRightX === 3) return 'X';
+    //     // if (diagLeftO === 3 || horisO === 3 || vertO === 3 || diagRightO === 3) return '0';
+    //   }
+    // }
+    // return undefined;
+  }
+
+
+  module.exports = {
+    getFizzBuzz,
+    getFactorial,
+    getSumBetweenNumbers,
+    isTriangle,
+    doRectanglesOverlap,
+    isInsideCircle,
+    findFirstSingleChar,
+    getIntervalString,
+    reverseString,
+    reverseInteger,
+    isCreditCardNumber,
+    getDigitalRoot,
+    isBracketsBalanced,
+    toNaryString,
+    getCommonDirectoryPath,
+    getMatrixProduct,
+    evaluateTicTacToePosition,
+  };
