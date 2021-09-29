@@ -289,22 +289,39 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
-  // let numSum = 0;
-  // let value;
-  // ccn.map((a, i) => {
-  //   if (i % 2 === 0) {
-  //     value = 2 * a;
-  //     if (value >= 10) {
-  //       value = (Math.floor(value / 10) + value % 10);
-  //     }
-  //   } else {
-  //     value = +a;
-  //   }
-  //   numSum += value;
-  // })
-  // return (numSum % 10 === 0);
+function isCreditCardNumber(ccn) {
+  // throw new Error('Not implemented');
+  const sumOfDigits = (x) => {
+    let k;
+    if (typeof x === 'number') k = x.toString().split('');
+    else k = x;
+    if (k.length === 1) return x;
+    return k.reduce((a, b) => Number.parseFloat(a) + Number.parseFloat(b));
+  };
+
+  const l = ccn.toString().length;
+
+  let digit;
+  let sum = 0;
+
+  let count = 0;
+
+  for (let i = l - 2; i >= 0; i -= 1) {
+    digit = Number.parseFloat(ccn.toString()[i]);
+
+    if (count === 0) {
+      sum += sumOfDigits(digit * 2);
+      count += 1;
+    } else {
+      sum += sumOfDigits(digit);
+      count = 0;
+    }
+  }
+
+  const realLastDigit = (10 - (sum % 10)).toString();
+
+  return realLastDigit[realLastDigit.length - 1] === ccn.toString()[l - 1];
+
 }
 
 /**
